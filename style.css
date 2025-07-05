@@ -293,3 +293,41 @@ button {
     margin: 0 1rem; /* Add some margin for smaller screens */
   }
 }
+
+/* Add this to your style.css file */
+
+.delete-all-btn {
+  background-color: #dc3545; /* Red color for destructive action */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  width: auto; /* Allow button to size to content */
+  margin-top: 1.5rem; /* Space it from the input row */
+  display: block; /* Make it a block element to take its own line */
+  margin-left: auto; /* Center the button if container allows */
+  margin-right: auto; /* Center the button if container allows */
+}
+
+.delete-all-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: translateY(-1px);
+}
+
+/* You might want to adjust existing li styles if the absence of remove button makes them look off */
+/* For example, if you had padding on the right specifically for the remove button */
+li {
+  /* Keep existing styles */
+  justify-content: flex-start; /* Adjust if you want items aligned left */
+  gap: 1rem; /* Adjust space between name and mark done button */
+}
+
+/* Re-adjust for small screens if needed */
+@media (max-width: 600px) {
+  .delete-all-btn {
+    width: 100%; /* Full width on small screens */
+  }
+}

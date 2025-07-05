@@ -11,7 +11,6 @@
   <div class="container">
     <h1> Weekly Cleaning Schedules</h1>
 
-    <!-- Common Area Section -->
     <section id="common-area">
       <h2> Common Area</h2>
       <ul class="people-list" id="common-list"></ul>
@@ -19,9 +18,9 @@
         <input type="text" id="common-input" placeholder="Add person..." />
         <button class="add-btn" onclick="addPerson('common')">+</button>
       </div>
+      <button class="delete-all-btn" onclick="confirmDeleteAll('common')">Delete All Common Area</button>
     </section>
 
-    <!-- Bathroom Section -->
     <section id="bathroom">
       <h2> Bathroom</h2>
       <ul class="people-list" id="bathroom-list"></ul>
@@ -29,10 +28,10 @@
         <input type="text" id="bathroom-input" placeholder="Add person..." />
         <button class="add-btn" onclick="addPerson('bathroom')">+</button>
       </div>
+      <button class="delete-all-btn" onclick="confirmDeleteAll('bathroom')">Delete All Bathroom</button>
     </section>
   </div>
 
-  <!-- Custom Confirmation Modal -->
   <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-text">
     <div class="modal-content">
       <p id="modal-text"></p>

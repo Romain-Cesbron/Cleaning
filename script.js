@@ -97,19 +97,9 @@ function renderList(type) {
       }
     });
 
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "Remove";
-    removeBtn.className = "remove";
-
-    removeBtn.addEventListener("click", async () => {
-      state[type].splice(index, 1);
-      await saveState();
-      renderList(type);
-    });
-
     li.appendChild(nameSpan);
     li.appendChild(toggleBtn);
-    li.appendChild(removeBtn);
+    // Removed the individual remove button
     listEl.appendChild(li);
   });
 }
@@ -128,13 +118,16 @@ async function addPerson(type) {
 function checkForReset(type) {
   const allDone = state[type].length > 0 && state[type].every(p => p.toggled);
   if (allDone) {
-    alert(`✅ All done! ${type === "common" ? "Common area" : "Bathroom"} cleaning resets.`);
-    state[type] = state[type].map(p => ({
-      ...p,
-      toggled: false,
-      doneDate: null
-    }));
-    saveState();
+    // Using the custom modal for the reset alert now
+    showConfirmation(`✅ All done! ${type === "common" ? "Common area" : "Bathroom"} cleaning resets.`, async () => {
+        state[type] = state[type].map(p => ({
+            ...p,
+            toggled: false,
+            doneDate: null
+        }));
+        await saveState();
+        renderList(type);
+    });
   }
 }
 
@@ -142,25 +135,58 @@ function showConfirmation(message, onConfirm) {
   modalText.textContent = message;
   modal.classList.remove("hidden");
 
+  // Temporarily store the original confirm/cancel handlers if any, then remove
+  // and re-add to prevent multiple event listeners stacking
+  const oldConfirmHandler = confirmBtn._currentHandler;
+  const oldCancelHandler = cancelBtn._currentHandler;
+
+  if (oldConfirmHandler) confirmBtn.removeEventListener("click", oldConfirmHandler);
+  if (oldCancelHandler) cancelBtn.removeEventListener("click", oldCancelHandler);
+
   const handleConfirm = () => {
     modal.classList.add("hidden");
+    onConfirm();
     confirmBtn.removeEventListener("click", handleConfirm);
     cancelBtn.removeEventListener("click", handleCancel);
-    onConfirm();
+    confirmBtn._currentHandler = null;
+    cancelBtn._currentHandler = null;
   };
 
   const handleCancel = () => {
     modal.classList.add("hidden");
     confirmBtn.removeEventListener("click", handleConfirm);
     cancelBtn.removeEventListener("click", handleCancel);
+    confirmBtn._currentHandler = null;
+    cancelBtn._currentHandler = null;
   };
 
   confirmBtn.addEventListener("click", handleConfirm);
   cancelBtn.addEventListener("click", handleCancel);
+
+  // Store current handlers to allow removal next time
+  confirmBtn._currentHandler = handleConfirm;
+  cancelBtn._currentHandler = handleCancel;
 }
 
-// Expose addPerson globally for inline onclick
+
+// New function to handle "Delete All" confirmation and action
+async function deleteAll(type) {
+  state[type] = []; // Clear the array for the given type
+  await saveState(); // Save the empty state to Firebase
+  renderList(type); // Re-render the list (it will now be empty)
+}
+
+function confirmDeleteAll(type) {
+  const sectionName = type === 'common' ? 'Common Area' : 'Bathroom';
+  showConfirmation(`Are you sure you want to delete ALL entries in the ${sectionName} list? This action cannot be undone.`, () => {
+    deleteAll(type);
+  });
+}
+
+
+// Expose functions globally for inline onclick
 window.addPerson = addPerson;
+window.confirmDeleteAll = confirmDeleteAll; // Make the new function globally accessible
 
 // Start listening to Firestore updates on page load
 listenToData();
