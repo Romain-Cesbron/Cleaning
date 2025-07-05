@@ -1,113 +1,162 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* Base Styles & Typography */
 body {
-  font-family: 'Inter', sans-serif;
-  background: #f2f4f7;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 2.5rem; /* Increased padding for more breathing room */
+  background-color: #f8f9fa; /* Light background for a clean feel */
+  color: #343a40; /* Darker text for readability */
+  line-height: 1.6;
 }
 
 .container {
-  width: 100%;
-  max-width: 700px;
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  max-width: 800px; /* Constrain content width */
+  margin: 0 auto; /* Center the container */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+  padding: 2.5rem 3rem;
 }
 
 h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
   text-align: center;
   margin-bottom: 2rem;
-  color: #333;
-  font-size: 1.8rem;
+  letter-spacing: -0.03em; /* Slightly tighter for modern look */
 }
 
-section {
-  margin-bottom: 3rem;
+h1::before {
+  content: '🧹 '; /* Unicode broom icon */
 }
 
 h2 {
+  font-size: 1.8rem;
+  color: #34495e;
+  margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #444;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e9ecef; /* Subtle separator */
 }
 
-.people-list {
+h2::before {
+  margin-right: 0.5rem;
+}
+
+#common-area h2::before {
+  content: '🏠'; /* Home icon */
+}
+
+#bathroom h2::before {
+  content: '🚿'; /* Shower icon */
+}
+
+/* List Styles */
+ul {
   list-style: none;
   padding: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.people-list li {
+li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #f9fafb;
-  padding: 0.8rem 1.2rem;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-.people-list span {
-  font-weight: 500;
-  color: #333;
-}
-
-button {
-  padding: 0.4rem 0.8rem;
-  border: none;
+  justify-content: space-between; /* Distribute items evenly */
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.7rem;
+  background-color: #f0f4f7; /* Light background for list items */
   border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for list items */
+  transition: all 0.2s ease-in-out;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 0.8rem; /* Space between elements within li */
 }
 
-button.toggled {
-  background-color: #34d399;
-  color: white;
+li:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-button.not-toggled {
-  background-color: #e0e7ff;
-  color: #1e40af;
+li span {
+  flex-grow: 1; /* Allow name to take up available space */
+  font-size: 1.1rem;
+  color: #495057;
+  font-weight: 500;
 }
 
-button.not-toggled:hover {
-  background-color: #c7d2fe;
-}
-
-button.remove {
-  background: #f87171;
-  color: white;
-  margin-left: 0.5rem;
-}
-
+/* Input Row */
 .input-row {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.input-row input {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+input[type="text"] {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #495057;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]::placeholder {
+  color: #adb5bd;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons */
+button {
+  padding: 0.75rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .add-btn {
-  background-color: #3b82f6;
+  background-color: #28a745; /* Green for add */
   color: white;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.toggled {
+  background-color: #20c997; /* Teal for done state */
+  color: white;
+}
+
+.not-toggled {
+  background-color: #6c757d; /* Gray for not done */
+  color: white;
+}
+
+.toggled:hover,
+.not-toggled:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.remove {
+  background-color: #dc3545; /* Red for remove */
+  color: white;
+}
+
+.remove:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
 }
 
 /* Modal Styles */
@@ -115,32 +164,60 @@ button.remove {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
+  align-items: center;
+  z-index: 1000; /* Ensure modal is on top */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal.hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction when hidden */
 }
 
 .modal-content {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  max-width: 90%;
+  max-width: 400px; /* Slightly wider modal */
   text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* More prominent shadow for modal */
+  transform: translateY(-20px); /* Initial subtle animation */
+  opacity: 0;
+  animation: fadeInModal 0.3s forwards;
 }
 
-.modal-content p {
+.modal.hidden .modal-content {
+  animation: fadeOutModal 0.3s forwards;
+}
+
+@keyframes fadeInModal {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutModal {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+#modal-text {
+  font-size: 1.2rem;
+  color: #343a40;
   margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  color: #333;
 }
 
 .modal-actions {
@@ -149,21 +226,70 @@ button.remove {
   gap: 1rem;
 }
 
-.modal-actions button {
-  padding: 0.5rem 1.2rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-button.confirm {
-  background: #34d399;
+.confirm {
+  background: #007bff; /* Blue for primary action */
   color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
 }
 
-button.cancel {
-  background: #e5e7eb;
-  color: #111827;
+.confirm:hover {
+  background: #0056b3;
+}
+
+.cancel {
+  background: #6c757d; /* Gray for secondary action */
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+}
+
+.cancel:hover {
+  background: #5a6268;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  .container {
+    padding: 1.5rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  li {
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  li button {
+    width: 100%; /* Full width buttons in list items */
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+    margin: 0 1rem; /* Add some margin for smaller screens */
+  }
 }

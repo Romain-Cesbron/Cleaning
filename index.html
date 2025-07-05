@@ -2,37 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Weekly Cleaning Schedule</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="container">
-    <h1>🧹 Weekly Cleaning Schedules</h1>
+    <h1> Weekly Cleaning Schedules</h1>
 
     <!-- Common Area Section -->
     <section id="common-area">
-      <h2>🏠 Common Area</h2>
+      <h2> Common Area</h2>
       <ul class="people-list" id="common-list"></ul>
       <div class="input-row">
-        <input type="text" id="common-input" placeholder="Add person...">
+        <input type="text" id="common-input" placeholder="Add person..." />
         <button class="add-btn" onclick="addPerson('common')">+</button>
       </div>
     </section>
 
     <!-- Bathroom Section -->
     <section id="bathroom">
-      <h2>🚿 Bathroom</h2>
+      <h2> Bathroom</h2>
       <ul class="people-list" id="bathroom-list"></ul>
       <div class="input-row">
-        <input type="text" id="bathroom-input" placeholder="Add person...">
+        <input type="text" id="bathroom-input" placeholder="Add person..." />
         <button class="add-btn" onclick="addPerson('bathroom')">+</button>
       </div>
     </section>
   </div>
 
   <!-- Custom Confirmation Modal -->
-  <div id="modal" class="modal hidden">
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-text">
     <div class="modal-content">
       <p id="modal-text"></p>
       <div class="modal-actions">
@@ -42,6 +43,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
